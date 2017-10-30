@@ -1,0 +1,2 @@
+ansible-playbook:
+    description: "Configure needed ansible files and run the playbook"

@@ -1,0 +1,1 @@
+includes: ['layer:ansible-base', 'layer:vnfproxy']  

@@ -1,0 +1,7 @@
+# Place here the ansible playbook to be run
+
+---
+- hosts: test
+  tasks:
+      - name: Create file
+        file: path=/tmp/playbook_created_file state=touch
