@@ -1,0 +1,14 @@
+---
+- hosts: targets
+  become: true
+  tasks:
+    # Tasks to configure the video server  
+    - name: change static IP address
+      shell: ifconfig eth1 10.4.1.7/24 mtu 1450 
+    - name: add static IP route
+      shell: ip route add 172.16.1.128/25 via 10.4.1.1 dev eth1
+    - name: start apache2 service
+      service:
+          name: apache2
+          state: started
+

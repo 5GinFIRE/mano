@@ -1,0 +1,17 @@
+"includes":
+- "layer:basic"
+- "layer:basic"
+- "layer:sshproxy"
+- "layer:basic"
+- "layer:ansible-base"
+- "layer:vnfproxy"
+"options":
+  "sshproxy": {}
+  "ansible-charm": {}
+  "ansible-base": {}
+  "vnfproxy": {}
+  "basic":
+    "use_venv": !!bool "false"
+    "packages": []
+    "include_system_packages": !!bool "false"
+"is": "ansible-charm"

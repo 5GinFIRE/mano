@@ -1,0 +1,19 @@
+"name": "ansible-charm"
+"summary": "Base charm layer to configure a VNF using ansible."
+"maintainer": "borja <bdorado@pa.uc3m.es>"
+"description": |
+  Base charm layer to configure a VNF using ansible, through the Juju framework of Open Source MANO (OSM).
+"tags":
+- "osm"
+- "vnf"
+- "misc"
+- "osm"
+- "vnf"
+"series":
+- "trusty"
+- "xenial"
+- "trusty"
+- "xenial"
+- "trusty"
+- "xenial"
+"subordinate": !!bool "false"
