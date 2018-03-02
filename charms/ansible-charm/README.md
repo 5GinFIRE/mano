@@ -26,8 +26,6 @@ Universidad Carlos III de Madrid (www.uc3m.es).
 # Upstream Project Name
 This work has been supported by the European H2020 5GinFIRE project (grant agreement 732497).
 
-# License
-Copyright 2017 Borja Nogales <bdorado@pa.uc3m.es>
 
 
 
