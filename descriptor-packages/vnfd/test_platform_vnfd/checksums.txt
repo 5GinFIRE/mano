@@ -1,0 +1,1 @@
+test_platform_vnfd.yaml  7072cae653d6df4101bc4bf870efa442
