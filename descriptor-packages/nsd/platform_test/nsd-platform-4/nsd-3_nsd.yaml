@@ -1,0 +1,55 @@
+nsd:nsd-catalog:
+    nsd:nsd:
+    -   nsd:constituent-vnfd:
+        -   nsd:member-vnf-index: '1'
+            nsd:start-by-default: 'true'
+            nsd:vnfd-id-ref: test_platform_vnfd
+        -   nsd:member-vnf-index: '2'
+            nsd:start-by-default: 'true'
+            nsd:vnfd-id-ref: test_platform_vnfd
+        -   nsd:member-vnf-index: '3'
+            nsd:start-by-default: 'true'
+            nsd:vnfd-id-ref: test_platform_vnfd
+        -   nsd:member-vnf-index: '4'
+            nsd:start-by-default: 'true'
+            nsd:vnfd-id-ref: test_platform_vnfd
+        nsd:id: a9a30d0d-c1f4-491a-9a44-128b98ef1198
+        nsd:name: nsd-platform-4
+        nsd:short-name: nsd-platform-4
+        nsd:vld:
+        -   nsd:id: mgmt
+            nsd:mgmt-network: 'true'
+            nsd:name: mgmt
+            nsd:type: ELAN
+            nsd:vim-network-name: provider
+            nsd:vnfd-connection-point-ref:
+            -   nsd:member-vnf-index-ref: '1'
+                nsd:vnfd-connection-point-ref: eth0
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '2'
+                nsd:vnfd-connection-point-ref: eth0
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '3'
+                nsd:vnfd-connection-point-ref: eth0
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '4'
+                nsd:vnfd-connection-point-ref: eth0
+                nsd:vnfd-id-ref: test_platform_vnfd
+        -   nsd:id: data
+            nsd:mgmt-network: 'false'
+            nsd:name: data
+            nsd:type: ELAN
+            nsd:vnfd-connection-point-ref:
+            -   nsd:member-vnf-index-ref: '1'
+                nsd:vnfd-connection-point-ref: eth1
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '2'
+                nsd:vnfd-connection-point-ref: eth1
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '3'
+                nsd:vnfd-connection-point-ref: eth1
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '4'
+                nsd:vnfd-connection-point-ref: eth1
+                nsd:vnfd-id-ref: test_platform_vnfd
+        rw-nsd:meta: '{"containerPositionMap":{"1":{"top":130,"left":260,"right":510,"bottom":185,"width":250,"height":55},"2":{"top":130,"left":635,"right":885,"bottom":185,"width":250,"height":55},"3":{"top":130,"left":1010,"right":1260,"bottom":185,"width":250,"height":55},"4":{"top":130,"left":1385,"right":1635,"bottom":185,"width":250,"height":55},"a9a30d0d-c1f4-491a-9a44-128b98ef1198":{"top":30,"left":135,"right":385,"bottom":85,"width":250,"height":55},"vld-1":{"top":300,"left":447.5,"right":697.5,"bottom":338,"width":250,"height":38},"vld-2":{"top":300,"left":822.5,"right":1072.5,"bottom":338,"width":250,"height":38},"mgmt":{"top":30,"left":810,"right":1060,"bottom":68,"width":250,"height":38},"data":{"top":300,"left":822.5,"right":1072.5,"bottom":338,"width":250,"height":38}}}'

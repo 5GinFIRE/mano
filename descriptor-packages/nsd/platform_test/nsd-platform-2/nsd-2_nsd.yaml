@@ -1,0 +1,37 @@
+nsd:nsd-catalog:
+    nsd:nsd:
+    -   nsd:constituent-vnfd:
+        -   nsd:member-vnf-index: '1'
+            nsd:start-by-default: 'true'
+            nsd:vnfd-id-ref: test_platform_vnfd
+        -   nsd:member-vnf-index: '2'
+            nsd:start-by-default: 'true'
+            nsd:vnfd-id-ref: test_platform_vnfd
+        nsd:id: a2c541d6-1e28-470d-853a-b9300846c06e
+        nsd:name: nsd-platform-2
+        nsd:short-name: nsd-platform-2
+        nsd:vld:
+        -   nsd:id: mgmt
+            nsd:mgmt-network: 'true'
+            nsd:name: mgmt
+            nsd:type: ELAN
+            nsd:vim-network-name: provider
+            nsd:vnfd-connection-point-ref:
+            -   nsd:member-vnf-index-ref: '1'
+                nsd:vnfd-connection-point-ref: eth0
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '2'
+                nsd:vnfd-connection-point-ref: eth0
+                nsd:vnfd-id-ref: test_platform_vnfd
+        -   nsd:id: data
+            nsd:mgmt-network: 'false'
+            nsd:name: data
+            nsd:type: ELAN
+            nsd:vnfd-connection-point-ref:
+            -   nsd:member-vnf-index-ref: '1'
+                nsd:vnfd-connection-point-ref: eth1
+                nsd:vnfd-id-ref: test_platform_vnfd
+            -   nsd:member-vnf-index-ref: '2'
+                nsd:vnfd-connection-point-ref: eth1
+                nsd:vnfd-id-ref: test_platform_vnfd
+        rw-nsd:meta: '{"containerPositionMap":{"1":{"top":300,"left":180,"right":430,"bottom":355,"width":250,"height":55},"2":{"top":300,"left":645,"right":895,"bottom":355,"width":250,"height":55},"a2c541d6-1e28-470d-853a-b9300846c06e":{"top":30,"left":135,"right":385,"bottom":85,"width":250,"height":55},"vld-1":{"top":180,"left":405,"right":655,"bottom":218,"width":250,"height":38},"vld-2":{"top":435,"left":405,"right":655,"bottom":473,"width":250,"height":38},"mgmt":{"top":195,"left":405,"right":655,"bottom":233,"width":250,"height":38},"data":{"top":435,"left":405,"right":655,"bottom":473,"width":250,"height":38}}}'
