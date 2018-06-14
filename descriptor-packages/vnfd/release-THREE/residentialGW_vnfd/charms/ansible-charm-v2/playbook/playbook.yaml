@@ -1,0 +1,27 @@
+# Place here the ansible playbook to be run
+
+---
+- hosts: targets
+  become: true
+  tasks:
+    # Task to configure residential gw
+    - name: Enable forwarding with sysctl module
+      sysctl:
+          name: net.ipv4.ip_forward
+          value: 1
+          sysctl_set: yes
+    - name: change eth1 IP address
+      shell: ifconfig eth1 10.4.0.10/24
+    - name: add static IP route to the video server
+      shell: ip route add 10.4.1.0/24 via 10.4.0.101 dev eth1
+    - name: change eth2 IP address
+      shell: ifconfig eth2 172.16.1.129/25
+    - name: configure dhcp server (I)
+      shell: echo "INTERFACES=\"eth2\"" > /etc/default/isc-dhcp-server
+    - name: configure dhcp server (II)
+      shell: echo "ddns-update-style none;\ndefault-lease-time 86400;\nmax-lease-time 86400;\nlog-facility local7;\n\nsubnet 172.16.1.128 netmask 255.255.255.128 {\n range 172.16.1.130 172.16.1.250;\n option routers 172.16.1.129;\n option subnet-mask 255.255.255.128;\n option broadcast-address 172.16.1.255;\n}" > /etc/dhcp/dhcpd.conf
+    - name: start dhcp service
+      service:
+          name: isc-dhcp-server
+          state: started
+
