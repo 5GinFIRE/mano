@@ -1,0 +1,19 @@
+# Place here the ansible playbook to be run
+
+---
+- hosts: targets
+  become: true
+  tasks:
+    # Task to configure the router
+    - name: Enable forwarding with sysctl module
+      sysctl:
+          name: net.ipv4.ip_forward
+          value: 1
+          sysctl_set: yes
+    - name: change eth1 IP address
+      shell: ifconfig eth1 10.4.0.101/24
+    - name: add static IP route to the video server
+      shell: ip route add 172.16.1.128/25 via 10.4.0.10 dev eth1
+    - name: change eth2 IP address
+      shell: ifconfig eth2 10.4.1.1/24
+
