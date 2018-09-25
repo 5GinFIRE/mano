@@ -1,0 +1,20 @@
+# Place here the ansible playbook to be run
+
+---
+- hosts: targets
+  become: true
+  tasks:
+    - name: change eth1 IP address
+      shell: ifconfig eth1 192.0.2.2/24 mtu 1450
+    - name: add static IP route to the caller A
+      shell: ip route add 192.168.1.0/24 via 192.0.2.1 dev eth1
+    - name: add static IP route to the caller B
+      shell: ip route add 192.168.2.0/24 via 192.0.2.11 dev eth1
+    - name: configure dns service (I)
+      shell: echo interface=eth1 > /etc/dnsmasq.conf
+    - name: configure dns service (II)
+      shell: echo 192.0.2.5	dronesVoIP.net >> /etc/hosts
+    - name: configure dns service (III)
+      shell: /etc/init.d/dnsmasq restart
+    - name: configure dns server
+      shell: echo "nameserver 127.0.0.1" > /etc/resolv.conf

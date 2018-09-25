@@ -1,0 +1,24 @@
+# Place here the ansible playbook to be run
+
+---
+- hosts: targets
+  become: true
+  tasks:
+    - name: change eth1 IP address
+      shell: ifconfig eth1 192.0.2.1/24 mtu 1450
+    - name: change eth2 IP address
+      shell: ifconfig eth2 192.168.1.1/24 mtu 1450
+    - name: add static IP route to the caller B
+      shell: ip route add 192.168.2.0/24 via 192.0.2.11 dev eth1
+    - name: configure dhcp server (I)
+      shell: echo "INTERFACES=\"eth2\"" > /etc/default/isc-dhcp-server
+    - name: configure dhcp server (II)
+      shell: echo "ddns-update-style none;\ndefault-lease-time 86400;\nmax-lease-time 86400;\nlog-facility local7;\n\nsubnet 192.168.1.0 netmask 255.255.255.0 {\n range 192.168.1.50 192.168.1.150;\n option routers 192.168.1.1;\n option subnet-mask 255.255.255.0;\n option broadcast-address 192.168.1.255;\n option domain-name-servers 192.0.2.2;\n}" > /etc/dhcp/dhcpd.conf
+    - name: start dhcp service
+      service:
+          name: isc-dhcp-server
+          state: started
+    - name: configure dns server
+      shell: echo "nameserver 192.0.2.2" > /etc/resolv.conf
+    - name: change eth3 IP address for telemetry
+      shell: ifconfig eth3 192.192.2.1/24 mtu 1450

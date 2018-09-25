@@ -1,0 +1,87 @@
+nsd:nsd-catalog:
+    nsd:
+    -   id: scenario_suavs_nsd
+        name: scenario_suavs_nsd
+        short-name: scenario_suavs_nsd
+        description: NS over a SUAVs platform
+        version: '1.0'
+        constituent-vnfd:
+        -   vnfd-id-ref: ap_a_vnfd
+            member-vnf-index: '1'
+        -   vnfd-id-ref: dns_vnfd
+            member-vnf-index: '2'
+        -   vnfd-id-ref: kamailio_vnfd
+            member-vnf-index: '3'
+        -   vnfd-id-ref: ap_b_vnfd
+            member-vnf-index: '4'
+        -   vnfd-id-ref: telemetry_vnfd
+            member-vnf-index: '5'
+        vld:
+        -   id: mgmtnet
+            name: mgmtnet
+            short-name: mgmtnet
+            type: ELAN
+            mgmt-network: 'true'
+            vim-network-name: provider
+            vnfd-connection-point-ref:
+            -   vnfd-id-ref: ap_a_vnfd
+                member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: vnf-mgmt
+            -   vnfd-id-ref: dns_vnfd
+                member-vnf-index-ref: '2'
+                vnfd-connection-point-ref: vnf-mgmt
+            -   vnfd-id-ref: kamailio_vnfd
+                member-vnf-index-ref: '3'
+                vnfd-connection-point-ref: vnf-mgmt
+            -   vnfd-id-ref: ap_b_vnfd
+                member-vnf-index-ref: '4'
+                vnfd-connection-point-ref: vnf-mgmt
+            -   vnfd-id-ref: telemetry_vnfd
+                member-vnf-index-ref: '5'
+                vnfd-connection-point-ref: vnf-mgmt
+        -   id: datanet
+            name: datanet
+            short-name: datanet
+            type: ELAN
+            vnfd-connection-point-ref:
+            -   vnfd-id-ref: ap_a_vnfd
+                member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: vnf-data-voip
+            -   vnfd-id-ref: dns_vnfd
+                member-vnf-index-ref: '2'
+                vnfd-connection-point-ref: vnf-data-voip
+            -   vnfd-id-ref: kamailio_vnfd
+                member-vnf-index-ref: '3'
+                vnfd-connection-point-ref: vnf-data-voip
+            -   vnfd-id-ref: ap_b_vnfd
+                member-vnf-index-ref: '4'
+                vnfd-connection-point-ref: vnf-data-voip
+        -   id: datanet-telemetry
+            name: datanet-telemetry
+            short-name: datanet-telemetry
+            type: ELAN
+            vnfd-connection-point-ref:
+            -   vnfd-id-ref: ap_a_vnfd
+                member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: vnf-data-telemetry
+            -   vnfd-id-ref: telemetry_vnfd
+                member-vnf-index-ref: '5'
+                vnfd-connection-point-ref: vnf-data-telemetry
+        -   id: datanetAPa
+            name: datanetAPa
+            short-name: datanetAPa
+            type: ELAN
+            vim-network-name: accessNetwork
+            vnfd-connection-point-ref:
+            -   vnfd-id-ref: ap_a_vnfd
+                member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: vnf-data-ap
+        -   id: datanetAPb
+            name: datanetAPb
+            short-name: datanetAPb
+            type: ELAN
+            vim-network-name: accessNetworkB
+            vnfd-connection-point-ref:
+            -   vnfd-id-ref: ap_b_vnfd
+                member-vnf-index-ref: '4'
+                vnfd-connection-point-ref: vnf-data-ap

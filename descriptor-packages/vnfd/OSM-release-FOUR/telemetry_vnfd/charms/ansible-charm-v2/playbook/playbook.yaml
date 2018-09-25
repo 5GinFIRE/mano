@@ -1,0 +1,11 @@
+# Place here the ansible playbook to be run
+
+---
+- hosts: targets
+  become: true
+  tasks:
+    - name: change eth1 IP address
+      shell: ifconfig eth1 192.192.2.1/24 mtu 1450
+    - name: add static IP route to the GCS
+      shell: ip route add 192.168.1.0/24 via 192.192.2.1 dev eth1
+
