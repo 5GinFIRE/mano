@@ -44,7 +44,7 @@ def ansible_playbook():
         # edit ansible hosts file with the VNF parameters
         h = open("/etc/ansible/hosts", "wt")
         h.write("[test]\n")
-        h1 = "{} ansible_connection=ssh ansible_ssh_user={} ansible_ssh_pass={}\n".format(cfg['ssh-hostname'],cfg['ssh-username'],cfg['ssh-password'])
+        h1 = "{} ansible_connection=ssh ansible_ssh_user={} ansible_ssh_pass={} ansible_python_interpreter=/usr/bin/python3\n".format(cfg['ssh-hostname'],cfg['ssh-username'],cfg['ssh-password'])
         h.write(h1)
         h.close()
         # edit ansible config to enable ssh connection with th VNF
