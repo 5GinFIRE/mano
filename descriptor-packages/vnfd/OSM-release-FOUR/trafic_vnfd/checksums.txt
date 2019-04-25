@@ -1,0 +1,1 @@
+736b99c4db3eab12173acd62cea0c24d  trafic_vnfd.yaml
