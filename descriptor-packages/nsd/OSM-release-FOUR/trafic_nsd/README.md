@@ -17,16 +17,16 @@ This VNF allows the creation of four different types of traffic flows between tw
 
 To generate .yaml files to define network flows, access the _/builder_ directory and run the desired .bash using the following parameters:
 
--s Server's IP address
--p Port where the server will listen
--b Variable for defining flows
+* -s Server's IP address
+* -p Port where the server will listen
+* -b Variable for defining flows
 
 Every flow avalaible is defined by a different parameter. The following network flows with their corresponding defining parameter _(-b value meaning)_ are supported:
 
-1. Greedy: Nº of bytes to be sent.
-2. RTA: Duration of the flow in seconds.
-3. RTV: Duration of the flow in seconds.
-4. Scavenger: Bandwidth used.
+1. Greedy: Nº of bytes to be sent
+2. RTA: Duration of the flow in seconds
+3. RTV: Duration of the flow in seconds
+4. Scavenger: Bandwidth used
 
 The generated flows will be stored under the folder _$HOME/webhooks/flows/_
 
@@ -58,10 +58,10 @@ Once the webhooks are running, they will listen to HTTP Request petitions. These
 
 To execute this files its neccessary to add the following parameters:
 
--s Server of the traffic flow
--t type of flow (greedy, scavenger, rta, rtv). 
--c defining parameter of the flow (see previous section)
--d destination ip of the request (where the webhook is listening to)
+* -s Server of the traffic flow
+* -t type of flow (greedy, scavenger, rta, rtv) 
+* -c defining parameter of the flow (see previous section)
+* -d destination ip of the request (where the webhook is listening to)
 
 Example:
 
