@@ -3,5 +3,6 @@ This folder contains the Network Service descriptor for the SUAV platform use ca
 + ap_a_vnfd
 + dns_vnfd
 + ap_b_vnfd
++ kamailio_vnfd
 + telemetry_vnfd
 
