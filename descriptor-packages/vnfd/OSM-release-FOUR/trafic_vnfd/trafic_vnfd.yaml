@@ -1,25 +1,9 @@
-#
-#   Copyright 2017 Luis Felix Gonzalez Blázquez <luisfgon@it.uc3m.es>, Ivan Vidal <ividal@it.uc3m.es>
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-#
-
 vnfd:vnfd-catalog:
     vnfd:
     -   id: trafic_vnfd
         name: trafic_vnf
         short-name: trafic_vnf
-        description: Complete Trafic VNF 
+        description: Simple VNF example with trafic 
         vendor: 5GinFIRE
         version: '1.0'
 
@@ -40,8 +24,8 @@ vnfd:vnfd-catalog:
             # Flavour of the VM to be instantiated for the VDU
             # flavor below can fit into m1.micro
             vm-flavor:
-                vcpu-count: 2
-                memory-mb: 1024
+                vcpu-count: 1
+                memory-mb: 512
                 storage-gb: 10
 
             # Image/checksum or image including the full path
@@ -67,10 +51,18 @@ vnfd:vnfd-catalog:
                 type: VPORT
             -   name: eth1
                 type: VPORT
+                port-security-enabled: false
 
-#        vnf-configuration:
-#            juju:
-#                charm: ansible-charm-v2
-#            initial-config-primitive:
-#            -   seq: '1'
-#                name: ansible-playbook
+        vnf-configuration:
+            juju:
+                charm: ansible-charm-v2
+            initial-config-primitive:
+            -   seq: '1'
+                name: config
+                parameter:
+                -   name: ssh-hostname
+                    value: <rw_mgmt_ip>
+                -   name: ssh-username
+                    value: lewis1
+                -   name: ssh-password
+                    value: lewis1
