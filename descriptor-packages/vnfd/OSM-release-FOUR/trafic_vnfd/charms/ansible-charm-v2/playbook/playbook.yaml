@@ -1,0 +1,41 @@
+- hosts: targets 
+  tasks: 
+  - name: "Build greedy flow"
+    command: sh /home/lewis1/builder/greedy.bash -s {{ item [2] }} -p {{ item[1] }} -b {{ item[0] }}
+    with_nested:
+    - ['500M']
+    - ['2027']
+    - ['10.4.0.31','10.4.32.32']
+ 
+  - name: "Build scav flow"
+    command: sh /home/lewis1/builder/scavenger.bash -s {{ item [2] }} -p {{ item[1] }} -b {{ item[0] }}
+    with_nested:
+    - ['10M']
+    - ['2028']
+    - ['10.4.0.31','10.4.32.32']
+
+  - name: "Build rta flow"
+    command: sh /home/lewis1/builder/rta.bash -s {{ item [2] }} -p {{ item[1] }} -b {{ item[0] }}
+    with_nested:
+    - ['30']
+    - ['2029']
+    - ['10.4.0.31','10.4.32.32']
+
+  - name: "Build rtv flow"
+    command: sh /home/lewis1/builder/rtv.bash -s {{ item [2] }} -p {{ item[1] }} -b {{ item[0] }}
+    with_nested:
+    - ['30']
+    - ['2030']
+    - ['10.4.0.31','10.4.32.32']
+
+  - name: "Set database name"
+    lineinfile:
+      path: /home/lewis1/webhooks/run-clients.bash
+      regexp: '^DB'
+      line: 'DB=webhooks'
+
+  - name: "Set databse IP"
+    lineinfile:
+      path: /home/lewis1/webhooks/run-clients.bash
+      regexp: '^INFLUXDB'
+      line: 'INFLUXDB=10.4.16.88'
