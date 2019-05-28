@@ -48,10 +48,10 @@ The generated file will be located at the directory _$HOME/webhooks/flows/greedy
 
 # Trafic instantiation
 
-To manage remotely the Trafic tool, we have built-in webhook support. To run them, it is neccessary to execute the .bash files for the server (run-servers-webhooks.bash) and client (run-clients-webhooks.bash) in the desired hosts. We reccomend executing this command in a separated terminal (using the _screen_ program, for example). The executed command should look like this:
+To manage remotely the Trafic tool, we have built-in webhook support. To run them, it is neccessary to execute the .bash file for the server and client in the desired hosts (the file allows both modes at the same time). We reccomend executing this command in a separated terminal (using the _screen_ program, for example). The executed command should look like this:
 
 ```
-./run-clients-webhooks.bash
+./run-hooks.bash
 ```
 
 Once the webhooks are running, they will listen to HTTP Request petitions. These petitions can be generated using the files under the directory *$HOME/controller/*, where two files will be located (one for the server and another one for the client). 
@@ -62,19 +62,22 @@ To execute this files its neccessary to add the following parameters:
 * -t type of flow (greedy, scavenger, rta, rtv) 
 * -c defining parameter of the flow (see previous section)
 * -d destination ip of the request (where the webhook is listening to)
+* -n InfluxDB measurement name in a database (used only for the client)
 
 Example:
 
 ```
- ./clients.bash -s 10.0.0.1 -t rtv -c 30 -d 10.0.0.4
+./servers.bash -s 10.0.0.1 -t rtv -c 30 -d 10.0.0.1
+./clients.bash -s 10.0.0.1 -t rtv -c 30 -d 10.0.0.4 -n MEASUREMENT_EXAMPLE
 ```
 
-This command will be sent to the client webhook in 10.0.0.4 to run a 30 second real-time audio flow to the server 10.0.0.1, whose descriptor file will be located in _$HOME/webhooks/flows/rtv/10.0.0.1/30/_. 
+The first command will be sent to the server webhook in 10.0.0.1 to run a 30 second real-time audio flow to the server 10.0.0.1, whose descriptor file will be located in _$HOME/webhooks/flows/rtv/10.0.0.1/30/_.
+The second command will be sent to the client webhook in 10.0.0.4 to run a 30 second real-time audio flow to the server 10.0.0.1, whose descriptor file will be located in _$HOME/webhooks/flows/rtv/10.0.0.1/30/_. The results will be dropped in the MEASUREMENT_EXAMPLE table in the destination InfluxDB (see Database support section). 
 
 In case the request wants to be sent through the command line, use the following format: 
 
 ```
-curl -d '{"type":"[FLOW_TYPE]", "class":"[CLASS_TYPE]", "label":"[FLOW_SERVER]"}' -H "Content-Type: application/json" -X POST http://[REQUEST_DESTINATION]:9000/hooks/start-[clients/servers]
+curl -d '{"type":"[FLOW_TYPE]", "class":"[CLASS_TYPE]", "label":"[FLOW_SERVER]", "name":"[INFLUXDB_MEASUREMENT]"}' -H "Content-Type: application/json" -X POST http://[REQUEST_DESTINATION]:9000/hooks/start-[clients/servers]
 ```
 
 The *clients/servers* option depends on the webhook that wants to be triggered on the receiving end.
@@ -82,7 +85,7 @@ The *clients/servers* option depends on the webhook that wants to be triggered o
 This command is equivalent to the previous one for the 30 sec rtv flow:
 
 ```
-curl -d '{"type":"rtv", "class":"30", "label":"10.0.0.1"}' -H "Content-Type: application/json" -X POST http://10.0.0.4:9000/hooks/start-clients
+curl -d '{"type":"rtv", "class":"30", "label":"10.0.0.1", "name":"MEASUREMENT_EXAMPLE"}' -H "Content-Type: application/json" -X POST http://10.0.0.4:9000/hooks/start-clients
 ```
 
 **Important: Run first the server, then the client**
